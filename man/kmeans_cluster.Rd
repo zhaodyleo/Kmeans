@@ -4,7 +4,7 @@
 \alias{kmeans_cluster}
 \title{kmeans_cluster}
 \usage{
-kmeans_cluster(X, center, max.iter, tol)
+kmeans_cluster(X, center, max.iter = 2500, tol = 1e-08)
 }
 \arguments{
 \item{X}{numeric matrix of data, or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).}
