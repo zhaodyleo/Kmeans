@@ -1,6 +1,6 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/zhaodyleo/Kmeans/workflows/R-CMD-check/badge.svg)](https://github.com/zhaodyleo/Kmeans/actions)
-  [![Coverage Status](https://coveralls.io/repos/github/zhaodyleo/Kmeans/badge.svg?branch=main)](https://coveralls.io/github/zhaodyleo/Kmeans?branch=main)
+  [![codecov](https://codecov.io/gh/zhaodyleo/Kmeans/branch/main/graph/badge.svg?token=IX9YM93CAO)](https://codecov.io/gh/zhaodyleo/Kmeans)
   <!-- badges: end -->
 
 # Kmeans
