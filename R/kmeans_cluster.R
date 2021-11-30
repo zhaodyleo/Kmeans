@@ -19,7 +19,7 @@
 #'@export
 #
 
-kmeans_cluster <- function(X, center, max.iter, tol){
+kmeans_cluster <- function(X, center, max.iter = 2500, tol = 1e-8){
   if(is.null(dim(X))){
     return(.kmeans_cluster_single(X, center, max.iter, tol))
   }else{
