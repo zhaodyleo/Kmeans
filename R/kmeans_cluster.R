@@ -15,52 +15,59 @@
 #'@export
 #
 
-kmeans_cluster <- function(X, center, max.iter, tol) {
-    # determine whether the loss coverage
-    check.tol <- function(fmax,fmin,ftol){
-      delta <- abs(fmax - fmin)
-      accuracy <- (abs(fmax) + abs(fmin))*ftol
-      return(delta < (accuracy + tol))
-    }
+kmeans_cluster <- function(X, center, max.iter, tol){
+  dim_x <- dim(X)
+  if(is.null(dim_x)){
+    return(.kmeans_cluster_single(X, center, max.iter, tol))
+  }else{
     X <- data.matrix(X)
-    N <- nrow(X)
-    p <- ncol(X)
-    nclust <- NULL
-    # check whether randomly assigned initial centres or use the input one
-    if(is.null(dim(center))){
-      nclust <- length(center)
-    }else{
-      nclust <- ncol(center)
-    }
-    # initialized the centres and label
-    if(length(unique(center)) != 1){
-      Cluster_index <- NULL
-      mu <- center
-    }else{
-      Cluster_index <- sample(1:nclust,N,replace = TRUE)
-      mu <- sapply(1:nclust,
-                   FUN = function(i) colMeans(X[Cluster_index == i,]))
-    }
-    # initialized the loss
-    SumofSquare_Loss <- 10^10
-    for(i in 1:max.iter){
-      SumofSquare_Loss0 <- SumofSquare_Loss
-      # apply the E step of algorithm which update
-      # sum of square loss, labels
-      SumOfSquare_diff <- apply(mu,
-                                MARGIN = 2,
-                                FUN = function(i) rowSums((sweep(X,MARGIN = 2,FUN = "-",i))^2))
-      Cluster_index <- apply(SumOfSquare_diff,
-                             MARGIN = 1,
-                             FUN = function(i) which.min(i))
-      SumofSquare_Loss <- sum(t(SumOfSquare_diff)[Cluster_index + seq(0,N * nclust - nclust,nclust)])/N
-      # apply the M step of algorithm which update the centres
-      mu <- sapply(1:nclust,
-                   FUN = function(i) colMeans(X[Cluster_index == i,]))
-      # check whether loss converge
-      if(check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
-        break
-      }
-    }
-    return(list(mus <- mu,est <- Cluster_index))
+    return(NULL)
+  }
 }
+
+.check.tol <- function(fmax,fmin,ftol){
+  delta <- abs(fmax - fmin)
+  accuracy <- (abs(fmax) + abs(fmin))*ftol
+  return(delta < (accuracy + tol))
+}
+
+.kmeans_cluster_single <- function(X, center, max.iter, tol) {
+  nclust <- NULL
+  # check whether randomly assigned initial centres or use the input one
+  # initialized the centres and label
+  if(length(unique(center)) != 1){
+    stopifnot("Center should include distinct value" = length(unique(center)) == length(center))
+    Cluster_index <- NULL
+    mu <- center
+  }else{
+    stopifnot("Center includes unique value but length not equal to 1" = length(center) == 1)
+    stopifnot("Center must be integer" = as.integer(center) == center)
+    stopifnot("Center should be greater than 1" = center > 1)
+    nclust <- center
+    Cluster_index <- sample(1:nclust,length(X),replace = TRUE)
+    mu <- sapply(1:nclust,
+                 FUN = function(i) X[Cluster_index == i,])
+  }
+  # initialized the loss
+  SumofSquare_Loss <- 10^10
+  for(i in 1:max.iter){
+    SumofSquare_Loss0 <- SumofSquare_Loss
+    # apply the E step of algorithm which update
+    # sum of square loss, labels
+    SumOfSquare_diff <- sapply(mu,
+                              FUN = function(i) (X-i)^2)
+    Cluster_index <- apply(SumOfSquare_diff,
+                           MARGIN = 1,
+                           FUN = function(i) which.min(i))
+    SumofSquare_Loss <- sum(t(SumOfSquare_diff)[Cluster_index + seq(0,N * nclust - nclust,nclust)])/length(X)
+    # apply the M step of algorithm which update the centres
+    mu <- sapply(1:nclust,
+                 FUN = function(i) X[Cluster_index == i,])
+    # check whether loss converge
+    if(check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
+      break
+    }
+  }
+  return(list(mus <- mu,est <- Cluster_index))
+}
+
