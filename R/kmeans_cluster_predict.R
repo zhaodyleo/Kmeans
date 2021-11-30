@@ -8,24 +8,28 @@
 #'@return  label for each row observations
 #'
 #'@examples
-#'
-#'
+#'    x = c(1,2,4,6,3)
+#'    mu = c(2,4)
+#'    kmeans_cluster_predict(x, mu)
 #'@export
 #
 
 kmeans_cluster_predict <- function(X, center){
-  nclust <- NULL
-  if(is.null(dim(center))){
-    nclust <- length(center)
+  if(is.null(dim(X))){
+    SumOfSquare_diff <- sapply(mu,
+                               FUN = function(i) (X-i)^2)
+    Cluster_index <- apply(SumOfSquare_diff,
+                           MARGIN = 1,
+                           FUN = function(i) which.min(i))
+    return(Cluster_index)
   }else{
-    nclust <- ncol(center)
+    X <- data.matrix(X)
+    SumOfSquare_diff <- apply(center,
+                              MARGIN = 2,
+                              FUN = function(i) rowSums((sweep(X,MARGIN = 2,FUN = "-",i))^2))
+    Cluster_index <- apply(SumOfSquare_diff,
+                           MARGIN = 1,
+                           FUN = function(i) which.min(i))
+    return(Cluster_index)
   }
-  X <- data.matrix(X)
-  SumOfSquare_diff <- apply(center,
-                            MARGIN = 2,
-                            FUN = function(i) rowSums((sweep(X,MARGIN = 2,FUN = "-",i))^2))
-  Cluster_index <- apply(SumOfSquare_diff,
-                         MARGIN = 1,
-                         FUN = function(i) which.min(i))
-  return(Cluster_index)
 }

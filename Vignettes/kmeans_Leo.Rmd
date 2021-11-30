@@ -41,5 +41,4 @@ training_result[[1]]
 training_result[[2]][1:10]
 ```
 
-
-
+We could use the `kmeans_cluster_predict`

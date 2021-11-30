@@ -11,17 +11,43 @@
 #'    If Y_test_actual and Y_test are not null, return the testing accuracy as well.
 #'
 #'@examples
-#'
+#' X1 = c(1,3,2,2,1,2,2)
+#' X2 = c(2,5,1,1,2,1,1)
+#' kmeans_label_rematch(X1,X2)
 #'
 #'@import dplyr
 #'@export
 #
 
 kmeans_label_rematch <- function(Y_train, Y_actual,Y_test = NULL,Y_test_actual = NULL){
-  c_data = data.frame(Y_train, Y_actual)
-  match_label = c_data %>%
+  Y_train_rematch <- Y_train
+  Y_test_rematch <- Y_test
+  c_data <- data.frame(Y_train, Y_actual)
+  match_label <- c_data %>%
     count(Y_actual,Y_train) %>%
     group_by(Y_actual) %>%
     filter(n == max(n)) %>%
     ungroup() %>% select(n)
+  for(i in 1:nrow(match_label)){
+    Y_train_rematch[Y_train == match_label[i,2]] <- match_label[i,1]
+    if(!is.null(Y_test)){
+      Y_test_rematch[Y_test == match_label[i,2]] <- match_label[i,1]
+    }
+  }
+  if(is.null(Y_test)){
+    return(list(label  <- Y_train_rematch,
+                accuracy  <- mean(Y_train_rematch == Y_actual)))
+  }else{
+    if(is.null(Y_test_actual)){
+      return(list(train_label  <- Y_train_rematch,
+                  test_label  <- Y_test_rematch,
+                  train_accuracy <- mean(Y_train_rematch == Y_actual) ))
+    }else{
+      return(list(train_label  <- Y_train_rematch,
+                  test_label  <- Y_test_rematch,
+                  train_accuracy <- mean(Y_train_rematch == Y_actual),
+                  test_accuracy <- mean(Y_test_rematch == Y_test)))
+    }
+  }
+
 }
