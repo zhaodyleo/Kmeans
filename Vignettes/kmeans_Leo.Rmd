@@ -23,15 +23,23 @@ devtools::install_github("zhaodyleo/Kmeans")
 
 # One-dimension clustering
 
-The `kmeans_cluster` function in kmeans library could perform one dimension clustering
+The `kmeans_cluster` function in `kmeans` library could perform one dimension clustering
 ```{r}
 library(kmeans)
 
 # randomly generate training data
 x1 = runif(10000,0,1)
 x2 = runif(10000,2,3)
-train_data = c(x1,x2)
-train_label = c(rep(0,10000),rep(1,10000))
-kmeans_cluster(train_data,2,2500,1e-8)
+x3 = runif(10000,3,4)
+train_data = c(x1,x2,x3)
+train_label = c(rep(0,10000),rep(1,10000),rep(2,10000))
+training_result = kmeans_cluster(train_data,2,2500,1e-8)
+# there is two output in training result 
+# one is centre 
+training_result[[1]]
+# One is the predict label 
+training_result[[2]][1:10]
 ```
+
+
 

@@ -16,8 +16,7 @@
 #
 
 kmeans_cluster <- function(X, center, max.iter, tol){
-  dim_x <- dim(X)
-  if(is.null(dim_x)){
+  if(is.null(dim(X))){
     return(.kmeans_cluster_single(X, center, max.iter, tol))
   }else{
     X <- data.matrix(X)
@@ -28,7 +27,7 @@ kmeans_cluster <- function(X, center, max.iter, tol){
 .check.tol <- function(fmax,fmin,ftol){
   delta <- abs(fmax - fmin)
   accuracy <- (abs(fmax) + abs(fmin))*ftol
-  return(delta < (accuracy + tol))
+  return(delta < (accuracy + ftol))
 }
 
 .kmeans_cluster_single <- function(X, center, max.iter, tol) {
@@ -46,7 +45,7 @@ kmeans_cluster <- function(X, center, max.iter, tol){
     nclust <- center
     Cluster_index <- sample(1:nclust,length(X),replace = TRUE)
     mu <- sapply(1:nclust,
-                 FUN = function(i) X[Cluster_index == i,])
+                 FUN = function(i) mean(X[Cluster_index == i]))
   }
   # initialized the loss
   SumofSquare_Loss <- 10^10
@@ -59,12 +58,12 @@ kmeans_cluster <- function(X, center, max.iter, tol){
     Cluster_index <- apply(SumOfSquare_diff,
                            MARGIN = 1,
                            FUN = function(i) which.min(i))
-    SumofSquare_Loss <- sum(t(SumOfSquare_diff)[Cluster_index + seq(0,N * nclust - nclust,nclust)])/length(X)
+    SumofSquare_Loss <- sum(t(SumOfSquare_diff)[Cluster_index + seq(0,length(X) * nclust - nclust,nclust)])/length(X)
     # apply the M step of algorithm which update the centres
     mu <- sapply(1:nclust,
-                 FUN = function(i) X[Cluster_index == i,])
+                 FUN = function(i) mean(X[Cluster_index == i]))
     # check whether loss converge
-    if(check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
+    if(.check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
       break
     }
   }
