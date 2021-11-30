@@ -23,7 +23,7 @@ devtools::install_github("zhaodyleo/Kmeans")
 
 # One-dimension clustering
 
-## Example 
+## kmeans_cluster_predict
 
 The `kmeans_cluster` function in `kmeans` library could perform one dimension clustering
 ```{r}
@@ -42,12 +42,14 @@ training_result[[1]]
 # One is the predict label 
 training_result[[2]][1:10]
 ```
+## kmeans_cluster_predict
 
 We could use the `kmeans_cluster_predict` function to predict the label which new observations belongs. 
 ```{r}
 X2 <- runif(1000,0,5)
 kmeans_cluster_predict(X2,training_result[[1]])[1:10]
 ```
+## kmeans_label_rematch
 
 Sometimes, the label we got from the kmeans didn't match the actual label. Thus,we could use `kmeans_label_rematch` function to match the train label with the actual label. This function will also return the training accuracy. If we input the test data, and the actual test label. It will return the test accuracy and the rematched label lists.
 ```{r}
