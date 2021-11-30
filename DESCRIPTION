@@ -8,6 +8,7 @@ Description: K-means clustering algorithm is one of famous clustering algorithm.
         into different cluster based on the center it initialized. Predict function and label rematch function are also 
         included.
 Encoding: UTF-8
+License: MIT
 LazyData: true
 Imports: Rcpp (>= 1.0.7)
 LinkingTo: Rcpp
