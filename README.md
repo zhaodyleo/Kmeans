@@ -27,5 +27,5 @@ install_github("zhaodyleo/Kmeans", build_vignettes = TRUE)
 
 The Kmeans vignettes can then be accessed via the following commands:
 ```
-vignette("Kmeans")
+vignette("kmeans_Leo")
 ```
