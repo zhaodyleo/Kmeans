@@ -30,7 +30,7 @@ library(kmeans)
 # randomly generate training data
 x1 = runif(10000,0,1)
 x2 = runif(10000,2,3)
-x3 = runif(10000,3,4)
+x3 = runif(10000,4,5)
 train_data = c(x1,x2,x3)
 train_label = c(rep(0,10000),rep(1,10000),rep(2,10000))
 training_result = kmeans_cluster(train_data, 3, 2500, 1e-8)
@@ -41,4 +41,18 @@ training_result[[1]]
 training_result[[2]][1:10]
 ```
 
-We could use the `kmeans_cluster_predict`
+We could use the `kmeans_cluster_predict` function to predict the label which new observations belongs. 
+```{r}
+X2 = runif(1000,0,5)
+kmeans_cluster_predict(X2,training_result[[1]])[1:10]
+```
+
+Sometimes, the label we got from the kmeans didn't match the actual label. Thus,we could use `kmeans_label_rematch` function to match the train label with the actual label. This function will also return the training accuracy. If we input the test data, and the actual test label. It will return the test accuracy and the rematched label lists.
+```{r}
+rematch_list = kmeans_label_rematch(training_result[[2]],train_label)
+rematch_list[[1]][1:10]
+# training accuracy
+rematch_list[[2]]
+```
+
+

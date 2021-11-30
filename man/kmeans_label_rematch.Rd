@@ -23,6 +23,8 @@ the vector of rematched label and training_accuracy.
 match the true label based on the label existed
 }
 \examples{
-
+X1 = c(1,3,2,2,1,2,2)
+X2 = c(2,5,1,1,2,1,1)
+kmeans_label_rematch(X1,X2)
 
 }

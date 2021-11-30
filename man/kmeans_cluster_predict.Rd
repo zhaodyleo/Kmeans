@@ -18,6 +18,7 @@ label for each row observations
 predict the label for each new data it belongs
 }
 \examples{
-
-
+   x = c(1,2,4,6,3)
+   mu = c(2,4)
+   kmeans_cluster_predict(x, mu)
 }

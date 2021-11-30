@@ -22,18 +22,20 @@
 kmeans_label_rematch <- function(Y_train, Y_actual,Y_test = NULL,Y_test_actual = NULL){
   Y_train_rematch <- Y_train
   Y_test_rematch <- Y_test
-  c_data <- data.frame(Y_train, Y_actual)
+  c_data <- data.frame(Y_train = Y_train, Y_actual = Y_actual)
   match_label <- c_data %>%
     count(Y_actual,Y_train) %>%
     group_by(Y_actual) %>%
     filter(n == max(n)) %>%
-    ungroup() %>% select(n)
+    ungroup()
   for(i in 1:nrow(match_label)){
-    Y_train_rematch[Y_train == match_label[i,2]] <- match_label[i,1]
+    Y_train_rematch[Y_train == as.numeric(match_label[i,2])] <- match_label[i,1]
     if(!is.null(Y_test)){
-      Y_test_rematch[Y_test == match_label[i,2]] <- match_label[i,1]
+      Y_test_rematch[Y_test == as.numeric(match_label[i,2])] <- match_label[i,1]
     }
   }
+  Y_train_rematch <- unlist(Y_train_rematch)
+  Y_test_rematch <- unlist(Y_test_rematch)
   if(is.null(Y_test)){
     return(list(label  <- Y_train_rematch,
                 accuracy  <- mean(Y_train_rematch == Y_actual)))
