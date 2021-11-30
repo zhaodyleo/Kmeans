@@ -10,7 +10,7 @@ Description: K-means clustering algorithm is one of famous clustering algorithm.
 Encoding: UTF-8
 License: MIT
 LazyData: true
-Imports:  dplyr, Rcpp (>= 1.0.7),qpdf
+Imports:  bench, dplyr
 LinkingTo: Rcpp
 RoxygenNote: 7.1.2
 Suggests: knitr, rmarkdown

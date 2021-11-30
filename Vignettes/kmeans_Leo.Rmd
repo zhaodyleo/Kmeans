@@ -93,6 +93,7 @@ all.equal(kmeans_cluster_label,kmeans_label)
 
 Let's compare the efficiency between kmeans_cluster and kmeans from stats.
 ```{r}
+library(bench)
 bench::mark(kmeans_cluster(train_data, 3, 2500, 1e-8))
 bench::mark(kmeans(train_data,3,iter.max = 2500))
 ```
