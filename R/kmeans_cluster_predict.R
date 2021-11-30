@@ -16,7 +16,7 @@
 
 kmeans_cluster_predict <- function(X, center){
   if(is.null(dim(X))){
-    SumOfSquare_diff <- sapply(mu,
+    SumOfSquare_diff <- sapply(center,
                                FUN = function(i) (X-i)^2)
     Cluster_index <- apply(SumOfSquare_diff,
                            MARGIN = 1,
