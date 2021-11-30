@@ -1,6 +1,6 @@
   <!-- badges: start -->
   [![R-CMD-check](https://github.com/zhaodyleo/Kmeans/workflows/R-CMD-check/badge.svg)](https://github.com/zhaodyleo/Kmeans/actions)
-  [![Coverage Status](https://coveralls.io/repos/github/campbio/celda/badge.svg?branch=master)](https://coveralls.io/github/campbio/celda?branch=master)
+  [![Coverage Status](https://coveralls.io/repos/github/zhaodyleo/Kmeans/badge.svg?branch=main)](https://coveralls.io/github/zhaodyleo/Kmeans?branch=main))
   <!-- badges: end -->
 
 
