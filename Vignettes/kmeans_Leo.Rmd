@@ -23,6 +23,8 @@ devtools::install_github("zhaodyleo/Kmeans")
 
 # One-dimension clustering
 
+## Example 
+
 The `kmeans_cluster` function in `kmeans` library could perform one dimension clustering
 ```{r}
 library(kmeans)
@@ -56,17 +58,43 @@ rematch_list[[2]]
 ```
 ```{r}
 test_label <- c(1,2,2,1,3,2,1)
-test_actual<- c(0,2,2,0,1,2,0)
+test_actual<- c(2,0,0,2,1,0,2)
 rematch_list_test <- kmeans_label_rematch(training_result[[2]],train_label,test_label)
 # rematched training label
 rematch_list_test[[1]][1:10]
-# training accuracy
-rematch_list_test[[2]]
 # rematched test label
+rematch_list_test[[2]]
+# training accuracy
 rematch_list_test[[3]]
 
 # include the actual test label will give the test accuracy
 rematch_list_test <- kmeans_label_rematch(training_result[[2]],train_label,test_label,test_actual)
 rematch_list_test[[4]]
 ```
+
+## Comparision with the kmeans function from `stats` library
+
+Following code will test the accuracy of kmeans_cluster with the kmeans function from stats library
+```{r}
+x1 <- runif(100000,0,1)
+x2 <- runif(100000,2,3)
+x3 <- runif(100000,4,5)
+
+index <- sample(1:300000,replace = FALSE)
+train_data <- c(x1,x2,x3)[index]
+train_label <- c(rep(0,10000),rep(1,10000),rep(2,10000))[index]
+training_result <- kmeans_cluster(train_data, 3, 2500, 1e-8)
+kmeans_stat_result <- kmeans(train_data,3)
+kmeans_cluster_label <- kmeans_label_rematch(training_result[[2]],train_label)
+kmeans_label <- kmeans_label_rematch(kmeans_stat_result$cluster,train_label)
+
+all.equal(kmeans_cluster_label,kmeans_label)
+```
+
+Let's compare the efficiency between kmeans_cluster and kmeans from stats.
+```{r}
+bench::mark(kmeans_cluster(train_data, 3, 2500, 1e-8))
+bench::mark(kmeans(train_data,3,iter.max = 2500))
+```
+
 
