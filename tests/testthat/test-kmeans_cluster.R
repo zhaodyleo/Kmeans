@@ -12,5 +12,6 @@ train_label = c(rep(0,100),rep(1,100))[index]
 
 test_that("accuracy check", {
   expect_equal(kmeans_label_rematch(kmeans_cluster(train_x,2)[[2]],train_label)[[2]],1)
+  expect_equal(kmeans_label_rematch(kmeans_cluster(train_x,c(0,3))[[2]],train_label)[[2]],1)
 })
 

@@ -40,6 +40,7 @@ kmeans_cluster <- function(X, center, max.iter = 2500, tol = 1e-8){
   # initialized the centres and label
   if(length(unique(center)) != 1){
     stopifnot("Center should include distinct value" = length(unique(center)) == length(center))
+    nclust <- length(center)
     Cluster_index <- NULL
     mu <- center
   }else{
