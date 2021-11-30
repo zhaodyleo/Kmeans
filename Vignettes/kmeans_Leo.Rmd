@@ -28,12 +28,12 @@ The `kmeans_cluster` function in `kmeans` library could perform one dimension cl
 library(kmeans)
 
 # randomly generate training data
-x1 = runif(10000,0,1)
-x2 = runif(10000,2,3)
-x3 = runif(10000,4,5)
-train_data = c(x1,x2,x3)
-train_label = c(rep(0,10000),rep(1,10000),rep(2,10000))
-training_result = kmeans_cluster(train_data, 3, 2500, 1e-8)
+x1 <- runif(10000,0,1)
+x2 <- runif(10000,2,3)
+x3 <- runif(10000,4,5)
+train_data <- c(x1,x2,x3)
+train_label <- c(rep(0,10000),rep(1,10000),rep(2,10000))
+training_result <- kmeans_cluster(train_data, 3, 2500, 1e-8)
 # there is two output in training result 
 # one is centre 
 training_result[[1]]
@@ -43,16 +43,30 @@ training_result[[2]][1:10]
 
 We could use the `kmeans_cluster_predict` function to predict the label which new observations belongs. 
 ```{r}
-X2 = runif(1000,0,5)
+X2 <- runif(1000,0,5)
 kmeans_cluster_predict(X2,training_result[[1]])[1:10]
 ```
 
 Sometimes, the label we got from the kmeans didn't match the actual label. Thus,we could use `kmeans_label_rematch` function to match the train label with the actual label. This function will also return the training accuracy. If we input the test data, and the actual test label. It will return the test accuracy and the rematched label lists.
 ```{r}
-rematch_list = kmeans_label_rematch(training_result[[2]],train_label)
+rematch_list <- kmeans_label_rematch(training_result[[2]],train_label)
 rematch_list[[1]][1:10]
 # training accuracy
 rematch_list[[2]]
 ```
+```{r}
+test_label <- c(1,2,2,1,3,2,1)
+test_actual<- c(0,2,2,0,1,2,0)
+rematch_list_test <- kmeans_label_rematch(training_result[[2]],train_label,test_label)
+# rematched training label
+rematch_list_test[[1]][1:10]
+# training accuracy
+rematch_list_test[[2]]
+# rematched test label
+rematch_list_test[[3]]
 
+# include the actual test label will give the test accuracy
+rematch_list_test <- kmeans_label_rematch(training_result[[2]],train_label,test_label,test_actual)
+rematch_list_test[[4]]
+```
 

@@ -48,7 +48,7 @@ kmeans_label_rematch <- function(Y_train, Y_actual,Y_test = NULL,Y_test_actual =
       return(list(train_label  <- Y_train_rematch,
                   test_label  <- Y_test_rematch,
                   train_accuracy <- mean(Y_train_rematch == Y_actual),
-                  test_accuracy <- mean(Y_test_rematch == Y_test)))
+                  test_accuracy <- mean(Y_test_rematch == Y_test_actual)))
     }
   }
 
