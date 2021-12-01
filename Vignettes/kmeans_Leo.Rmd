@@ -163,7 +163,7 @@ all.equal(kmeans_cluster_label,kmeans_label)
 ```
 
 ```{r}
-bench::mark(kmeans_cluster(train_data,3,2500,1e-8))[,c(2,3,5)]
+bench::mark(kmeans_cluster(train_data,3,2500,1e-8),filter_gc = FALSE)[,c(2,3,5)]
 bench::mark(kmeans(train_data,3))[,c(2,3,5)]
 ```
 
