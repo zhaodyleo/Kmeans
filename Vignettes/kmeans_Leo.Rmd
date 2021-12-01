@@ -23,7 +23,7 @@ devtools::install_github("zhaodyleo/Kmeans")
 
 # One-dimension clustering
 
-## kmeans_cluster_predict
+## kmeans_cluster
 
 The `kmeans_cluster` function in `kmeans` library could perform one dimension clustering
 ```{r}
@@ -75,7 +75,27 @@ rematch_list_test <- kmeans_label_rematch(training_result[[2]],train_label,test_
 rematch_list_test[[4]]
 ```
 
-## Comparision with the kmeans function from `stats` library
+
+# Multi-dimension clustering
+
+## kmeans_cluster
+
+
+```{r}
+X1 = runif(10000,0,1)
+X2 = runif(10000,0,1)
+X3 = runif(10000,3,5)
+X4 = runif(10000,3,5)
+train_data = cbind(c(X1,X3),c(X2,X4))
+train_label = c(rep(0,10000),rep(1,10000))
+training_result = kmeans_cluster(train_data,2,2500,1e-8)
+```
+
+
+
+
+
+# Comparision with the kmeans function from `stats` library
 
 Following code will test the accuracy of kmeans_cluster with the kmeans function from stats library
 ```{r}
@@ -102,5 +122,4 @@ bench::mark(kmeans(train_data,3,iter.max = 2500))[,c(2,3,5)]
 ```
 
 Unfortunately, kmeans_cluster didn't perform better than the kmeans from the stats library. Potential reason is that kmeans from stats library using Rcpp in the function to speed up some functionality. Also, it used different algorithms which may be more efficient in computation. 
-
 

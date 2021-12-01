@@ -125,7 +125,7 @@ kmeans_cluster <- function(X, center, max.iter = 2500, tol = 1e-8){
     mu <- sapply(1:nclust,
                  FUN = function(i) colMeans(X[Cluster_index == i,]))
     # check whether loss converge
-    if(check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
+    if(.check.tol(SumofSquare_Loss0,SumofSquare_Loss,tol)){
       break
     }
   }
