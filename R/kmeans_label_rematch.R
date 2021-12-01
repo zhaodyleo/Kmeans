@@ -7,8 +7,8 @@
 #'@param Y_test predict label for testing data (optional)
 #'@param Y_test_actual the actual test label(optional)
 #'
-#'@return  the vector of rematched label and training_accuracy.
-#'    If Y_test_actual and Y_test are not null, return the testing accuracy as well.
+#'@return  the vector of matched label and training_accuracy.
+#'    If Y_test_actual and Y_test are not null, return the matched test label and testing accuracy respectively.
 #'
 #'@examples
 #' X1 = c(1,3,2,2,1,2,2)
