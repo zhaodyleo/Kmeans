@@ -22,10 +22,21 @@ a list contains centres of each cluster and the labels for each observation
 Perform k-means clustering on a data matrix.
 }
 \examples{
-x1 = runif(10000,0,1)
-x2 = runif(10000,2,3)
-x3 = runif(10000,4,5)
-train_data = c(x1,x2,x3)
-train_label = c(rep(0,10000),rep(1,10000),rep(2,10000))
-training_result = kmeans_cluster(train_data,3,2500,1e-8)
+
+# One Dimension Example
+x1 <-  runif(10000,0,1)
+x2 <-  runif(10000,2,3)
+x3 <-  runif(10000,4,5)
+train_data <-  c(x1,x2,x3)
+train_label <-  c(rep(0,10000),rep(1,10000),rep(2,10000))
+training_result <-  kmeans_cluster(train_data,3,2500,1e-8)
+
+# Multi Dimension Example
+X1 <-  runif(10000,0,1)
+X2 <-  runif(10000,0,1)
+X3 <-  runif(10000,3,5)
+X4 <-  runif(10000,3,5)
+train_data <-  cbind(c(X1,X3),c(X2,X4))
+train_label <-  c(rep(0,10000),rep(1,10000))
+training_result<-  kmeans_cluster(train_data,3,2500,1e-8)
 }
