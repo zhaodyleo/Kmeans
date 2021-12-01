@@ -13,7 +13,7 @@ kmeans_label_rematch(Y_train, Y_actual, Y_test = NULL, Y_test_actual = NULL)
 
 \item{Y_test}{predict label for testing data (optional)}
 
-\item{Y_test_actual}{the actual test label}
+\item{Y_test_actual}{the actual test label(optional)}
 }
 \value{
 the vector of rematched label and training_accuracy.
