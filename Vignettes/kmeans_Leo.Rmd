@@ -130,7 +130,7 @@ kmeans_stat_result <- kmeans(train_data,3)
 kmeans_cluster_label <- kmeans_label_rematch(training_result[[2]],train_label)
 kmeans_label <- kmeans_label_rematch(kmeans_stat_result$cluster,train_label)
 
-all.equal(kmeans_cluster_label[[1]],kmeans_label)
+all.equal(kmeans_cluster_label,kmeans_label)
 ```
 
 Let's compare the efficiency between kmeans_cluster and kmeans from stats.
