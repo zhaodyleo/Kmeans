@@ -20,9 +20,9 @@ predict the label for each new data it belongs
 \examples{
 
 # One dimension example
-   x = c(1,2,4,6,3)
-   mu = c(2,4)
-   kmeans_cluster_predict(x, mu)
+ x = c(1,2,4,6,3)
+ mu = c(2,4)
+ kmeans_cluster_predict(x, mu)
 # Multi dimension example
  X1 <- runif(1000,0,1)
  X2 <- runif(1000,0,1)

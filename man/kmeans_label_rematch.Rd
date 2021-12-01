@@ -16,8 +16,8 @@ kmeans_label_rematch(Y_train, Y_actual, Y_test = NULL, Y_test_actual = NULL)
 \item{Y_test_actual}{the actual test label(optional)}
 }
 \value{
-the vector of rematched label and training_accuracy.
-   If Y_test_actual and Y_test are not null, return the testing accuracy as well.
+the vector of matched label and training_accuracy.
+   If Y_test_actual and Y_test are not null, return the matched test label and testing accuracy respectively.
 }
 \description{
 match the true label based on the label existed
