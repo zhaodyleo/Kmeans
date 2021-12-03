@@ -38,5 +38,5 @@ X3 <-  runif(10000,3,5)
 X4 <-  runif(10000,3,5)
 train_data <-  cbind(c(X1,X3),c(X2,X4))
 train_label <-  c(rep(0,10000),rep(1,10000))
-training_result<-  kmeans_cluster(train_data,3,2500,1e-8)
+training_result<-  kmeans_cluster(train_data,2,2500,1e-8)
 }
