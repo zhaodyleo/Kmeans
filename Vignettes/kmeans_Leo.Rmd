@@ -152,8 +152,9 @@ X6 <-  runif(10000,3,5)
 index  <-  sample(1:30000)
 train_data <-  cbind(c(X1,X3,X5),c(X2,X4,X6))[index,]
 train_label <-  c(rep(0,10000),rep(1,10000),rep(2,10000))[index]
-training_result <-  kmeans_cluster(train_data,3,2500,1e-8)
-kmeans_stat_result <- kmeans(train_data,3)
+initial_center <- matrix(c(1.1,2,3.3,2,3.3,4),2,3)
+training_result <-  kmeans_cluster(train_data,initial_center ,2500,1e-8)
+kmeans_stat_result <- kmeans(train_data,t(initial_center))
 kmeans_cluster_label <- kmeans_label_rematch(training_result[[2]],train_label)
 kmeans_label <- kmeans_label_rematch(kmeans_stat_result$cluster,train_label)
 # Both method will provide same results 
