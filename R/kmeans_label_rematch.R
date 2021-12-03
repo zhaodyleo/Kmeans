@@ -1,6 +1,6 @@
 #'kmeans_label_rematch
 #'
-#'match the true label based on the label existed
+#'match the trained label with the actual label. Matching process used the idea of majority vote.
 #'
 #'@param Y_train label got from the kmeans_cluster from training data
 #'@param Y_actual the actual label
