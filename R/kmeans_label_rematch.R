@@ -12,7 +12,12 @@
 #'
 #'@examples
 #' X1 = c(1,3,2,2,1,2,2)
-#' X2 = c(2,5,1,1,2,1,1)
+#' X2 = c(2,5,1,1,1,1,1)
+#'
+#' # Function will determine match label based on majority vote
+#' # Cluster label 1 will match 2
+#' # cluster label 3 will match 5
+#' # Cluster label 2 will match 1
 #' kmeans_label_rematch(X1,X2)
 #'
 #'@import dplyr
