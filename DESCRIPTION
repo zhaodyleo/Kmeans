@@ -4,9 +4,7 @@ Title: The package will perform the kmeans cluster on the data matrix
 Version: 0.1.0
 Author: Dongyang Zhao
 Maintainer: Dongyang Zhao<zhaoleo@umich.edu>
-Description: K-means clustering algorithm is one of famous clustering algorithm.It is able to assigm each observations
-        into different cluster based on the center it initialized. Predict function and label rematch function are also 
-        included.
+Description: K-means clustering algorithm is one of famous clustering algorithm.It is able to assigm each observations into different cluster based on the center it initialized. Predict function and label rematch function are also included.
 Encoding: UTF-8
 License: MIT
 LazyData: true
